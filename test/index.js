@@ -26,6 +26,17 @@ tape('increment a buffer', function (t) {
 })
 
 
+tape('increment 1,2,3 bytes', function (t) {
+  t.deepEqual(inc(new Buffer([255])), new Buffer([0]))
+  t.deepEqual(inc(new Buffer([255, 255])), new Buffer([0, 0]))
+  t.deepEqual(inc(new Buffer([0, 255])), new Buffer([1, 0]))
+  t.deepEqual(inc(new Buffer([0, 255, 255])), new Buffer([1, 0, 0]))
+  t.deepEqual(inc(new Buffer([255, 0, 255])), new Buffer([255, 1, 0]))
+  t.deepEqual(inc(new Buffer([255, 255, 255])), new Buffer([0, 0, 0]))
+  t.end()
+
+})
+
 tape('increment a buffer, big number', function (t) {
 
   t.deepEqual(inc(B(234987234)), B(234987235))
